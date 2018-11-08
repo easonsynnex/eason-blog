@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Write Article</title>
+    <!-- Make sure the path to CKEditor is correct. -->
+   <script src="/blog/ckeditor/ckeditor.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="icon" href="/blog/img/icon.png" type="image/x-icon"/>
+    <!--<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--    <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>-->
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </meta>
+    <style>
+        #cke_editor{
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+        <!-- Title -->
+        <table style="width: 90%; text-align: left; padding: 5px; margin: 0 auto">
+            <tr><td style="width:50px">标题: </td>
+                <td>
+                    <el-input v-model="articleName" placeholder="请输入内容"></el-input>
+                </td>
+            </tr>
+            <tr><td>摘要: </td>
+                <td style=''>
+                    <el-input
+                            type="textarea"
+                            :rows="2"
+                            placeholder="请输入内容"
+                            v-model="digest">
+                    </el-input>
+                </td>
+            </tr>
+            <tr><td>分类: </td>
+                <td>
+                    <el-select v-model="category" placeholder="请选择">
+                        <el-option
+                                v-for="item in items"
+                                :key="item.categoryId"
+                                :label="item.categoryName"
+                                :value="item.categoryId">
+                        </el-option>
+                    </el-select>
+                </td>
+            </tr>
+        </table>
+    <textarea name="editor" id="editor" rows="60" cols="80">
+        This is my textarea to be replaced with CKEditor.
+        </textarea>
+
+    <div style="margin:0 auto; width: 90%; text-align: left;padding-top: 13px">
+        <el-button type="primary" @click.native="save">提交</el-button>
+    </div>
+</div>
+<script>
+    var getAllCategory = function(t){
+        axios.post('/blog/article/getAllCategory', {
+        }).then(function (response) {
+                vue.$data.items = response.data
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    var vue = new Vue({
+      el: '#app',
+      data:{
+                items:[],
+                articleName:'',
+                digest:'',
+                category:''
+            },
+        created: function(){
+            this.$nextTick(//延迟加载
+                function(){
+                    CKEDITOR.replace('editor',{
+                        language : 'zh-cn',
+                        filebrowserImageUploadUrl : '/blog/user/uploadImg',
+                        image_previewText : '',
+                        height: '550px',
+                        width: '90%'
+                    });
+                }
+            )
+        },
+        methods: {
+            save: function (event) {
+                var content = CKEDITOR.instances.editor.getData();
+                var articleName = vue.$data.articleName;
+                var digest = vue.$data.digest;
+                var category = vue.$data.category;
+                if(articleName=='' || content=='' || category==''){
+                    alert('请输入完整信息');
+                    return;
+                }
+                //请求的Content-Type为application/x-www-form-urlencoded
+                let param = new URLSearchParams();
+                param.append("articleName", articleName);
+                param.append("digest", digest);
+                param.append("content", content);
+                param.append("category", category);
+                axios.post('/blog/article/save', param)
+                    .then(function (response) {
+                    alert("success")
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        },
+       ready: getAllCategory(this)
+    })
+</script>
+
+</body>
+</html>

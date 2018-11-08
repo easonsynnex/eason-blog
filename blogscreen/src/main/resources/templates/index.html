@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Eason的个人博客</title>
+    <meta name="keywords" content="个人博客，自己搭建的博客，尹胜的个人博客，java菜鸟一枚">
+    <meta name="description" content="自己编码搭建的博客，旨在记录生活、提高技术，欢迎一起交流">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <!-- 引入样式 -->
+    <link rel="icon" href="/blog/img/icon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/blog/css/common.css">
+    <link rel="stylesheet" href="/blog/css/index.css">
+    <!--<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </meta>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <div class="navigation">
+            <div class="home">
+                <a href="#"><img src="/blog/img/home.png"></a>
+            </div>
+            <div class="navs">
+                <ul>
+                    <li><a href="/blog/article/index">首页</a></li>
+                    <li><a href="#">技术</a></li>
+                    <li><a href="#">笔记</a></li>
+                    <li><a href="#">旅游</a></li>
+                    <li><a href="#">关于我</a></li>
+                    <li><a href="#">留言</a></li>
+                </ul>
+            </div>
+            <div class="search-input">
+                <el-input placeholder="请输入内容" v-model="search" class="input-with-select">
+
+                    <el-button slot="append" icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <div class="one-article">
+                <span class="title">
+                    <a href="/blog/article/show/${lateArticle.articleId}" target="_blank">
+                        ${lateArticle.articleName}</a>
+                </span>
+                <div class="content">
+                    ${lateArticle.articleContent}
+                </div>
+                <span>
+                    <a href="/blog/article/show/${lateArticle.articleId}"  target="_blank" class="read-more">
+                        »阅读全文
+                    </a>
+                </span>
+            </div>
+
+            <div class="recent-articles">
+                <h2>最新文章</h2>
+                <ul>
+                    <#list recentArticles as article>
+                    <li>${article.entryDatetime?string("yyyy-MM-dd")}&nbsp;&nbsp;
+                        <a href="/blog/article/show/${article.articleId}" target="_blank">${article.articleName}</a></li>
+                    </#list>
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="personal-img">
+                <img src="/blog/img/head.gif">
+            </div>
+            <div class="personal-desc">
+                英文名：Eason<br />
+                破壳日：1993-11-11（农历）<br />
+                毕业院校：成都信息工程大学<br />
+                Java菜鸟程序员一枚，搭建此网站旨在记录生活点滴，提高技能，希望自己能一如既往坚持下去!
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    var vue = new Vue({
+      el: '#app',
+      data:{
+            search: ''
+            },
+        created: function(){
+            this.$nextTick(//延迟加载
+
+            )
+        },
+        methods: {
+            save: function (event) {
+
+            }
+        },
+       ready: function () {
+           
+       }
+    })
+</script>
+
+</body>
+</html>

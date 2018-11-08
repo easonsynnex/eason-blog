@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${blog.articleName}</title>
+    <link rel="icon" href="/static/img/icon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="/blog/css/common.css">
+    <link rel="stylesheet" href="/blog/css/article.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!--<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </meta>
+    <style rel="stylesheet" aria-haspopup="">
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="header">
+        <div class="navigation">
+            <div class="home">
+                <a href="#"><img src="/blog/img/home.png"></a>
+            </div>
+            <div class="navs">
+                <ul>
+                    <li><a href="/blog/article/index">首页</a></li>
+                    <li><a href="#">技术</a></li>
+                    <li><a href="#">笔记</a></li>
+                    <li><a href="#">旅游</a></li>
+                    <li><a href="#">关于我</a></li>
+                    <li><a href="#">留言</a></li>
+                </ul>
+            </div>
+            <div class="search-input">
+                <el-input placeholder="请输入内容" v-model="search" class="input-with-select">
+
+                    <el-button slot="append" icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title">
+            <span class="title-name">${blog.articleName}</span>
+            <span class="article-info">
+                Date : ${blog.entryDatetime?string("yyyy-MM-dd HH:mm:ss")}&nbsp;&nbsp;&nbsp;&nbsp;
+             </span>
+         </div>
+         <div class="article-content">
+             ${blog.articleContent}
+         </div>
+
+         <div class="footer">
+         More...
+
+         </div>
+     </div>
+</div>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data:{
+            search: ''
+        },
+        created: function(){
+            this.$nextTick(//延迟加载
+
+            )
+        },
+        methods: {
+            save: function (event) {
+
+            }
+        },
+        ready: function () {
+
+        }
+    })
+</script>
+ </body>
+ </html>

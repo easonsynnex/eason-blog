@@ -1,0 +1,33 @@
+
+.content{
+    width: 60%;
+    margin: 30px auto;
+}
+.content .title{
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.content .content{
+    width: 100%;
+    min-height: 500px;
+}
+.title .title-name{
+    display: block;
+    font-size: 40px;
+    font-family: "Adobe 宋体 Std L";
+}
+.content .article-info{
+    display: block;
+    margin-top: 10px;
+    font-family: Georgia,serif;
+    color: grey;
+}
+.content .footer{
+    width: 100%;
+    height: 80px;
+    margin-top: 50px;
+    background-color:#F7F7F7;
+    border-radius: 5px;
+}
